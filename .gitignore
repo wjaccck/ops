@@ -1,0 +1,13 @@
+*.pyc
+*.json
+*.log
+*.xml
+*.zip
+*.sqlite3
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources/
+api/migrations/
+env/
+static/
+templates/
