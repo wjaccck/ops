@@ -37,6 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_extensions',
+    'api',
+    'components',
+    'django_select2',
+    'bootstrap_pagination',
+    'corsheaders',
+    'djcelery',
+
 ]
 
 MIDDLEWARE = [
@@ -119,3 +129,131 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'core.pagination.DefaultResultsSetPagination',
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_filters.backends.DjangoFilterBackend',
+    ),
+}
+
+
+# Select 2
+AUTO_RENDER_SELECT2_STATICS = True
+SELECT2_BOOTSTRAP = True
+# Set the cache backend to select2
+SELECT2_CACHE_BACKEND = 'select2'
+REDIS_TIMEOUT=7*24*60*60
+CUBES_REDIS_TIMEOUT=60*60
+NEVER_REDIS_TIMEOUT=365*24*60*60
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://:cc62601845fc3c66cdbb81915a871605@10.99.69.35:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    'select2': {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://:cc62601845fc3c66cdbb81915a871605@10.99.69.35:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+
+# Debug Toolbar
+# DEBUG_TOOLBAR_CONFIG = {
+#     'JQUERY_URL': '//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js',
+# }
+
+LOGIN_REDIRECT_URL='/'
+LOGIN_URL='/login/'
+LOGOUT_REDIRECT_URL='/login/'
+
+#
+# AUTH_LDAP_SERVER_URI = "ldap://172.28.100.101:389"
+# AUTH_LDAP_BIND_DN = unicode("CN=admin_cy,OU=创研中心,DC=shfang,DC=net","utf8")
+# AUTH_LDAP_BIND_PASSWORD = "Ehouse027="
+# OU=unicode('OU=创研中心,DC=shfang,DC=net', 'utf8')
+# AUTH_LDAP_USER_SEARCH = LDAPSearch(OU, ldap.SCOPE_SUBTREE, "(sAMAccountName=%(user)s)")
+#
+# AUTH_LDAP_USER_ATTR_MAP = {
+#        "first_name": "givenName",
+#        "last_name": "sn",
+#        "email":"mail"
+# }
+#
+# AUTHENTICATION_BACKENDS = (
+#     'django_auth_ldap.backend.LDAPBackend',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+
+
+REQUEST_LOG_PATH = os.path.join(BASE_DIR, 'request.log')
+ACT_LOG_PATH = os.path.join(BASE_DIR, 'act.log')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '[%(asctime)s] %(levelname)s %(module)s.%(funcName)s-[%(lineno)d] %(message)s'
+        },
+    },
+    'filters': {
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'standard',
+        },
+        'windows_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': REQUEST_LOG_PATH,
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'act_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': ACT_LOG_PATH,
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins', 'windows_handler'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['windows_handler'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'ops': {
+            'handlers': ['act_handler'],
+            'level': 'DEBUG',
+            'propagate': False
+        }
+    }
+}
+
