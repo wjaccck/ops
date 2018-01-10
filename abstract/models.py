@@ -12,8 +12,8 @@ class CommonModel(models.Model):
         abstract = True
 
 class NameModel(models.Model):
-    name = models.CharField(max_length=80)
-
+    name = models.CharField(max_length=50)
+    alias = models.CharField(max_length=50)
     # Meta data for one object.
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -44,6 +44,16 @@ class API_BASE(models.Model):
     @staticmethod
     def father():
         return u'api'
+
+    class Meta:
+        abstract=True
+
+
+class COMPONENTS_BASE(models.Model):
+    pass
+    @staticmethod
+    def father():
+        return u'components'
 
     class Meta:
         abstract=True

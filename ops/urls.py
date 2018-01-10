@@ -13,9 +13,42 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import include, url
 from django.contrib import admin
-from django.urls import path
+from rest_framework.authtoken import views
+from django.conf import settings
+if settings.DEBUG:
+    import debug_toolbar
+
+from rest_framework_swagger.views import get_swagger_view
+from django.contrib.auth.views import login,logout
+from webui.forms import LoginForm
+schema_view = get_swagger_view(title='Pastebin API')
+
+admin.autodiscover()
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
+    url(r'^api/token/', views.obtain_auth_token),
+    url(r'^api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^components/', include('components.urls')),
+    url(r'^ui/', include('webui.urls')),
+    url(r'^swagger/', schema_view),
+    url(r'^login/$',
+        login,
+        {
+            'template_name': 'webui/login.html',
+            'authentication_form': LoginForm,
+
+        },
+        name='login', ),
+
+    url(r'^logout/$',
+        logout,
+        {
+            'next_page': '/ui/',
+        },
+        name='logout'),
 ]

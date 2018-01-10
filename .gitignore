@@ -1,5 +1,4 @@
 *.pyc
-*.json
 *.log
 *.xml
 *.zip
@@ -8,5 +7,6 @@
 .idea/dataSources.xml
 .idea/dataSources/
 api/migrations/
+components/migrations/
 env/
 static/
