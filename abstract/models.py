@@ -39,14 +39,6 @@ class UniqueNameDescModel(models.Model):
     def __str__(self):
         return self.name
 
-class API_BASE(models.Model):
-    pass
-    @staticmethod
-    def father():
-        return u'api'
-
-    class Meta:
-        abstract=True
 
 
 class COMPONENTS_BASE(models.Model):
@@ -58,11 +50,11 @@ class COMPONENTS_BASE(models.Model):
     class Meta:
         abstract=True
 
-class IDC_BASE(models.Model):
+class CMDB_BASE(models.Model):
     pass
     @staticmethod
     def father():
-        return u'idc'
+        return u'cmdb'
 
     class Meta:
         abstract=True

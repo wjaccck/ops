@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_extensions',
-    'api',
+    'cmdb',
     'components',
     'django_select2',
     'bootstrap_pagination',
@@ -162,14 +162,14 @@ NEVER_REDIS_TIMEOUT=365*24*60*60
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:cc62601845fc3c66cdbb81915a871605@10.99.69.35:6379/0",
+        "LOCATION": "redis://127.0.0.1:6379/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     'select2': {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:cc62601845fc3c66cdbb81915a871605@10.99.69.35:6379/1",
+        "LOCATION": "redis://127.0.0.1:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }

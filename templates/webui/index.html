@@ -85,6 +85,24 @@
 
     </li>
 
+        {% if active == 'cmdb' %}
+            <li class="active">
+        {% else %}
+            <li>
+        {% endif %}
+        <a href="">
+        <i class="icon-grid"></i>
+        <span class="title">CMDB</span>
+            <ul class="sub-menu">
+                <li>
+                    <a  href="{% url 'machine-list' %}">
+                    MACHINE-STATUS</a>
+                </li>
+            </ul>
+        </a>
+    </li>
+
+
         {% if active == 'components' %}
             <li class="active">
         {% else %}
