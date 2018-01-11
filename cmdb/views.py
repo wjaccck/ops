@@ -52,4 +52,4 @@ class Machine_listViewSet(Base_ListViewSet):
         if query_list:
             return list(set(Machine.objects.select_related().filter(reduce(operator.and_, query_list))))
         else:
-            return Machine.objects.select_related().all()
+            return Machine.objects.all()

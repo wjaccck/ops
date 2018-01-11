@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^components/', include('components.urls')),
     url(r'^cmdb/', include('cmdb.urls')),
+    url(r'^api/', include('api.urls')),
     url(r'^ui/', include('webui.urls')),
     url(r'^swagger/', schema_view),
     # Django Select2
