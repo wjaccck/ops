@@ -1,6 +1,6 @@
 #coding=utf8
 from .models import *
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from .forms import Machine_statusForm,Machine_tagForm,Resource_tagForm,Resource_statusForm,Cluster_statusForm,Cluster_tagForm
 from abstract.views import Base_ListViewSet,Base_CreateViewSet,Base_UpdateViewSet,Base_DeleteViewSet
 

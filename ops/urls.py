@@ -29,8 +29,8 @@ admin.autodiscover()
 
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^__debug__/', include(debug_toolbar.urls)),
+    url(r'^admin/', admin.site.urls),
+    # url(r'^__debug__/', include('debug_toolbar.urls',namespace='dubug_toolbar')),
     url(r'^api/token/', views.obtain_auth_token),
     url(r'^api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^components/', include('components.urls')),

@@ -2,7 +2,7 @@ from django.db import models
 from abstract.models import CommonModel,CMDB_BASE
 from components.models import *
 class Machine(CommonModel,CMDB_BASE):
-    console_ip=models.OneToOneField(Ipv4Address,related_name='console_ip')
+    console_ip=models.OneToOneField(Ipv4Address,related_name='console_ip',on_delete=models.CASCADE)
     ipv4=models.ManyToManyField(Ipv4Address,blank=True)
     cpu=models.CharField(max_length=100,blank=True)
     kernel=models.CharField(max_length=100,blank=True)
@@ -19,8 +19,8 @@ class Machine(CommonModel,CMDB_BASE):
     distribution_version=models.CharField(max_length=25,blank=True)
     manufacturer=models.CharField(max_length=25, blank=True)
     serial = models.CharField(max_length=10, blank=True,db_index=True)
-    status=models.ForeignKey(Machine_status)
-    tag=models.ManyToManyField(Machine_tag,blank=True)
+    status=models.ForeignKey(Machine_status,on_delete=models.CASCADE)
+    tag=models.ManyToManyField(Machine_tag, blank=True)
     def __str__(self):
         return self.console_ip.name
 

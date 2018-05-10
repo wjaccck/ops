@@ -3,6 +3,7 @@
 from django.db.models import Count
 from rest_framework import viewsets
 from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
 from components.models import *
 from .serializers import *
@@ -22,7 +23,7 @@ class Ipv4Address_ApiViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.DjangoModelPermissions,)
 
     # Applies Filters
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, )
     filter_fields = ('name',)
     search_fields = ('^name', )
 
@@ -47,7 +48,7 @@ class Ipv4Network_ApiViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.DjangoModelPermissions,)
 
     # Applies Filters
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, )
     filter_fields = ('name', )
     search_fields = ('^name', )
 

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_extensions',
+    'django_filters',
+    # 'guardian',
     'api',
     'cmdb',
     'components',
@@ -47,7 +49,7 @@ INSTALLED_APPS = [
     'bootstrap_pagination',
     'corsheaders',
     'djcelery',
-    'debug_toolbar',
+    # 'debug_toolbar',
 
 ]
 
@@ -59,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'ops.urls'
@@ -147,7 +149,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'core.pagination.DefaultResultsSetPagination',
     'DEFAULT_FILTER_BACKENDS': (
-        'rest_framework_filters.backends.DjangoFilterBackend',
+        'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
 
@@ -262,25 +264,25 @@ LOGGING = {
     }
 }
 
-DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-]
+# DEBUG_TOOLBAR_PANELS = [
+#     'debug_toolbar.panels.versions.VersionsPanel',
+#     'debug_toolbar.panels.timer.TimerPanel',
+#     'debug_toolbar.panels.settings.SettingsPanel',
+#     'debug_toolbar.panels.headers.HeadersPanel',
+#     'debug_toolbar.panels.request.RequestPanel',
+#     'debug_toolbar.panels.sql.SQLPanel',
+#     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+#     'debug_toolbar.panels.templates.TemplatesPanel',
+#     'debug_toolbar.panels.cache.CachePanel',
+#     'debug_toolbar.panels.signals.SignalsPanel',
+#     'debug_toolbar.panels.logging.LoggingPanel',
+#     'debug_toolbar.panels.redirects.RedirectsPanel',
+# ]
 
 # Debug Toolbar
-DEBUG_TOOLBAR_CONFIG = {
-    'JQUERY_URL': '//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js',
-}
+# DEBUG_TOOLBAR_CONFIG = {
+#     'JQUERY_URL': '//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js',
+# }
 
 
 #swagger
